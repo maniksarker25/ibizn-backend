@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 const config = require("../config/index");
 const userSchema = new Schema(
   {
-    firstName: {
+    fullName: {
       type: String,
       require: true,
     },
-    lastName: {
+    email: {
       type: String,
       require: true,
     },
@@ -15,9 +15,15 @@ const userSchema = new Schema(
       type: Number,
       require: true,
     },
-    email: {
+    whatsapp: {
+      type: String,
+    },
+    companyName: {
       type: String,
       require: true,
+    },
+    companyAddress: {
+      type: String,
     },
     password: {
       type: String,
