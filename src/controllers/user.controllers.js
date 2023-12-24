@@ -3,6 +3,7 @@ const sendResponse = require("../utilities/sendResponse");
 const { createUserIntoDB } = require("../services/user.services");
 const User = require("../models/user.model");
 const catchAsync = require("../utilities/catchAsync");
+const AppError = require("../error/appError");
 
 const createUser = catchAsync(async (req, res, next) => {
   const isExists = await User.exists({ email: req.body.email });
