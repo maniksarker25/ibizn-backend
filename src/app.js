@@ -11,7 +11,7 @@ const globalErrorHandler = require("./utilities/globalErrorHandler");
 const notFound = require("./utilities/notFound");
 const userRoutes = require("./routes/user.routes");
 
-// use all routes -----
+// use all routes -----9---------
 app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => {
