@@ -3,14 +3,10 @@ const config = require("../config/index");
 
 const generateToken = (user) => {
   const payload = {
-    user: {
-      id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      password: user.password,
-      phone: user.phone,
-    },
+    userId: user._id,
+    fullName: user.fullName,
+    email: user.email,
+    role: user.role,
   };
 
   return jwt.sign(payload, config.jwt_secret, { expiresIn: "10d" }); // You can adjust the expiration time as needed
