@@ -58,7 +58,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       require: true,
-      select: 0,
+      // select: 0,
     },
     bankAccount: {
       type: bankAccountSchema,

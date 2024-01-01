@@ -52,4 +52,15 @@ const updateUserIntoDB = async (id, payload) => {
   );
   return result;
 };
-module.exports = { createUserIntoDB, loginUserIntoDB, updateUserIntoDB };
+
+// get single user from db ------------
+const getSingleUser = async (id) => {
+  const result = await User.findOne({ _id: id });
+  return result;
+};
+module.exports = {
+  createUserIntoDB,
+  loginUserIntoDB,
+  updateUserIntoDB,
+  getSingleUser,
+};

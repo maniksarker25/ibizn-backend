@@ -4,6 +4,7 @@ const {
   createUserIntoDB,
   loginUserIntoDB,
   updateUserIntoDB,
+  getSingleUser,
 } = require("../services/user.services");
 const User = require("../models/user.model");
 const catchAsync = require("../utilities/catchAsync");
@@ -42,4 +43,16 @@ const updateUser = catchAsync(async (req, res) => {
   });
 });
 
-module.exports = { createUser, loginUser, updateUser };
+// get single user -----------------------
+const getSingeUser = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await getSingleUser(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User retrieved successfully",
+    data: result,
+  });
+});
+
+module.exports = { createUser, loginUser, updateUser, getSingeUser };
