@@ -27,6 +27,7 @@ const auth = (...requiredRoles) => {
     }
     // add those properties in req
     //req.user = decoded as JwtPayload;
+    req.user = decoded;
     next();
   });
 };
