@@ -22,7 +22,7 @@ const packageSchema = new Schema({
     type: Number,
     required: true,
   },
-  fulBoard: {
+  fullBoard: {
     type: Boolean,
     required: true,
   },
