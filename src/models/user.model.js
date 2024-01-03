@@ -60,6 +60,10 @@ const userSchema = new Schema(
       require: true,
       // select: 0,
     },
+    isValid:{
+      type: Boolean,
+      default: false,
+    },
     bankAccount: {
       type: bankAccountSchema,
     },
