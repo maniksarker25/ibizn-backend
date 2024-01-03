@@ -24,19 +24,19 @@ const packageSchema = new Schema({
   },
   fullBoard: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   breakfast: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   upgradeable: {
     type: Boolean,
-    required: true,
+    default: false,
   },
-  drivingCourses: {
+  divingCourses: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   price: {
     type: Number,
