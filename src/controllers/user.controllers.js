@@ -22,7 +22,7 @@ const createUser = catchAsync(async (req, res) => {
     <h1>Welcome to Infinite Blue</h1>
     <br/>
     <p>To verify your email please <a href=${
-      "https://localhost:3000/userverfication/" + generateToken(result)
+      "https://localhost:3000/userVerification/" + generateToken(result)
     }>click here</a></p>
     </div>`, // html body
   });
