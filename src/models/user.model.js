@@ -1,27 +1,71 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const config = require("../config/index");
+
+const localBankSchema = new Schema({
+  bankName: {
+    type: String,
+    required: true,
+  },
+  routingNumber: {
+    type: String,
+    required: true,
+  },
+  accountNumber: {
+    type: String,
+    required: true,
+  },
+  accountHolderName: {
+    type: String,
+    required: true,
+  },
+});
+const wiseSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+  },
+});
+const bankAccountSchema = new Schema({
+  localBank: localBankSchema,
+  wiseBank: wiseSchema,
+});
 const userSchema = new Schema(
   {
-    firstName: {
+    fullName: {
       type: String,
-      require: true,
-    },
-    lastName: {
-      type: String,
-      require: true,
-    },
-    phone: {
-      type: Number,
       require: true,
     },
     email: {
       type: String,
       require: true,
+      unique: true,
+    },
+    phone: {
+      type: Number,
+      require: true,
+    },
+    whatsapp: {
+      type: String,
+    },
+    companyName: {
+      type: String,
+      require: true,
+    },
+    companyAddress: {
+      type: String,
     },
     password: {
       type: String,
       require: true,
+      // select: 0,
+    },
+    bankAccount: {
+      type: bankAccountSchema,
+    },
+    role: {
+      type: String,
+      default: "operator",
     },
   },
   {

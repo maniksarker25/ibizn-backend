@@ -1,16 +1,16 @@
 const httpStatus = require("http-status");
 const sendResponse = require("../utilities/sendResponse");
-const { createUserIntoDB } = require("../services/user.services");
+const {
+  createUserIntoDB,
+  loginUserIntoDB,
+  updateUserIntoDB,
+  getSingleUser,
+} = require("../services/user.services");
 const User = require("../models/user.model");
 const catchAsync = require("../utilities/catchAsync");
+const AppError = require("../error/appError");
 
-const createUser = catchAsync(async (req, res, next) => {
-  const isExists = await User.exists({ email: req.body.email });
-  if (isExists) {
-    return res
-      .status(httpStatus.BAD_REQUEST)
-      .json({ success: false, message: "User already exists" });
-  }
+const createUser = catchAsync(async (req, res) => {
   const result = await createUserIntoDB(req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -20,4 +20,39 @@ const createUser = catchAsync(async (req, res, next) => {
   });
 });
 
-module.exports = { createUser };
+// login user -------
+const loginUser = catchAsync(async (req, res) => {
+  const result = await loginUserIntoDB(req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Sign Up Successfully",
+    data: result,
+  });
+});
+
+// update user -------------------
+const updateUser = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await updateUserIntoDB(id, req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User updated successfully",
+    data: result,
+  });
+});
+
+// get single user -----------------------
+const getSingeUser = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await getSingleUser(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User retrieved successfully",
+    data: result,
+  });
+});
+
+module.exports = { createUser, loginUser, updateUser, getSingeUser };
