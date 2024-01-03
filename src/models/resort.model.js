@@ -86,16 +86,28 @@ const resortSchema = new Schema({
     type: String,
     required: true,
   },
-  accommodations: {
-    type: [accommodationSchema],
+  // accommodations: {
+  //   type: [accommodationSchema],
+  //   required: true,
+  // },
+  accommodation: {
+    type: accommodationSchema,
     required: true,
   },
-  divings: {
-    type: [divingSchema],
+  // divings: {
+  //   type: [divingSchema],
+  //   required: true,
+  // },
+  diving: {
+    type: divingSchema,
     required: true,
   },
-  foods: {
-    type: [foodSchema],
+  // foods: {
+  //   type: [foodSchema],
+  //   required: true,
+  // },
+  food: {
+    type: foodSchema,
     required: true,
   },
   carousalImages: {
