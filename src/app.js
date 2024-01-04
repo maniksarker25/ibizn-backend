@@ -12,11 +12,13 @@ const notFound = require("./utilities/notFound");
 const userRoutes = require("./routes/user.routes");
 const packageRoutes = require("./routes/package.routes");
 const resortRoutes = require("./routes/resort.routes");
+const itineraryRoutes = require("./routes/itinerary.routes");
 
 // use all routes -----9---------
 app.use("/api/users", userRoutes);
 app.use("/api/packages", packageRoutes);
 app.use("/api/resorts", resortRoutes);
+app.use("/api/itineraries", itineraryRoutes);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

@@ -56,7 +56,7 @@ const loginUser = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Sign Up Successfully",
+    message: "User Login Successfully",
     data: result,
   });
 });
