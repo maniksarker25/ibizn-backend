@@ -26,7 +26,7 @@ const createUser = catchAsync(async (req, res) => {
     }>click here</a></p>
     </div>`, // html body
   });
-  console.log(mailer);
+  console.log(req.body.email, mailer);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

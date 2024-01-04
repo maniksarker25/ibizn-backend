@@ -6,4 +6,10 @@ const createPackageIntoDB = (userData, payload) => {
   return result;
 };
 
-module.exports = { createPackageIntoDB };
+// get all packages into db
+const getAllPackageIntoDB = async (id) => {
+  const result = await Package.find({ user: id });
+  return result;
+};
+
+module.exports = { createPackageIntoDB, getAllPackageIntoDB };

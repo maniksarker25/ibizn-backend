@@ -22,6 +22,13 @@ const loginUserIntoDB = async (payload) => {
   if (!isExists) {
     throw new AppError(httpStatus.NOT_FOUND, "User not found");
   }
+  const isValid = isExists.isValid;
+  if (!isValid) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "You are not verified.Check you email for verification"
+    );
+  }
   //check if the password is correct
   const isPasswordMatched = await bcrypt.compare(
     payload.password,
