@@ -9,26 +9,43 @@ const {
 const User = require("../models/user.model");
 const catchAsync = require("../utilities/catchAsync");
 const AppError = require("../error/appError");
-const transporter = require('../config/smtp')
-const {generateToken} = require('../config/jwtConfig')
+const transporter = require("../config/smtp");
+const { generateToken } = require("../config/jwtConfig");
 const createUser = catchAsync(async (req, res) => {
   const result = await createUserIntoDB(req.body);
   const mailer = await transporter.sendMail({
-    from: 'deapth.search.it@gmail.com', // sender address
-    to: "safi29317@gmail.com", // list of receivers
+    from: "deapth.search.it@gmail.com", // sender address
+    to: req?.body?.email, // list of receivers
     subject: "Email Verification", // Subject line
     text: "Verification", // plain text body
     html: `<div>
     <h1>Welcome to Infinite Blue</h1>
     <br/>
-    <p>To verify your email please <a href=${'https://localhost:3000/userverfication/' + generateToken(result)}>click here</a></p>
+    <p>To verify your email please <a href=${
+      "http://localhost:3000/userVerification/" + generateToken(result)
+    }>click here</a></p>
     </div>`, // html body
   });
-  console.log(mailer)
+  console.log(req.body.email, mailer);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: "Sign Up Successfully",
+    data: result,
+  });
+});
+
+const verifyUser = catchAsync(async (req, res) => {
+  const id = req.user.userId;
+  const result = await User.findByIdAndUpdate(
+    id,
+    { isValid: true },
+    { new: true, runValidators: true }
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User verified Successfully",
     data: result,
   });
 });
@@ -39,7 +56,7 @@ const loginUser = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Sign Up Successfully",
+    message: "User Login Successfully",
     data: result,
   });
 });
@@ -68,4 +85,10 @@ const getSingeUser = catchAsync(async (req, res) => {
   });
 });
 
-module.exports = { createUser, loginUser, updateUser, getSingeUser };
+module.exports = {
+  createUser,
+  loginUser,
+  updateUser,
+  getSingeUser,
+  verifyUser,
+};
